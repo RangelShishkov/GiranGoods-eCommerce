@@ -5,7 +5,7 @@ const Logo = ({width, height}) => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
       xmlns:svgjs="http://svgjs.dev/svgjs"
       width={width}
       height={height}
@@ -19,7 +19,7 @@ const Logo = ({width, height}) => {
           height="368"
           width="2000"
           xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlnsXlink="http://www.w3.org/1999/xlink"
         >
           <g
             id="tight-bounds"
@@ -67,7 +67,7 @@ const Logo = ({width, height}) => {
                                     opacity="1"
                                     transform="matrix(1,0,0,1,0,0)"
                                     fill="#000000"
-                                    class="wordmark-text-0"
+                                    className="wordmark-text-0"
                                     data-fill-palette-color="primary"
                                     id="text-0"
                                   ></path>

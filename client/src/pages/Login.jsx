@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { IoMdEye } from "react-icons/io";
 import { FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -32,7 +32,7 @@ const Login = () => {
     <section id="login">
       <div className="mx-auto container p-4">
         <div className="bg-white p-2 w-full max-w-md mx-auto rounded">
-          <form action="" className="p-3" onSubmit={onSubmitHandler}>
+          <form action="" className="p-3 flex flex-col gap-3" onSubmit={onSubmitHandler}>
             <div className="grid">
               <label htmlFor="email">Email:</label>
               <div className="bg-slate-100 p-2">
@@ -42,6 +42,7 @@ const Login = () => {
                   name="email"
                   value={data.email}
                   onChange={onChangeHandler}
+                  required
                   className="w-full h-full outline-none bg-transparent "
                 />
               </div>
@@ -56,6 +57,7 @@ const Login = () => {
                   name="password"
                   value={data.password}
                   onChange={onChangeHandler}
+                  required
                   className="w-full h-full outline-none bg-transparent"
                 />
                 <div

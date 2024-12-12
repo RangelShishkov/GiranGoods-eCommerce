@@ -3,9 +3,12 @@ const cartProductModel = require("../../models/cartProductModel");
 const addToCartController = async (req, res) => {
   try {
     const { productId } = req?.body;
-    const  currentUser  = req.userId;
-    console.log("cur user",currentUser)
-    const isProductAvaliable = await cartProductModel.findOne({ productId });
+    const currentUser = req.userId;
+    console.log("cur user", currentUser);
+    const isProductAvaliable = await cartProductModel.findOne({
+      productId,
+      userId: currentUser,
+    });
 
     if (isProductAvaliable) {
       return res.json({
@@ -39,4 +42,4 @@ const addToCartController = async (req, res) => {
   }
 };
 
-module.exports = addToCartController
+module.exports = addToCartController;

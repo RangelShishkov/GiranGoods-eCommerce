@@ -12,12 +12,12 @@ const ProductDisplay = ({ category, heading }) => {
   const [loading, setLoading] = useState(true);
   const loadingList = new Array(13).fill(null);
 
-  const {  fetchUserAddToCart } = useContext(Context);
+  const { fetchUserAddToCart } = useContext(Context);
 
-  const addToCartHandler = async(e,id) => {
-    await addToCart(e, id)
-    fetchUserAddToCart()
-  }
+  const addToCartHandler = async (e, id) => {
+    await addToCart(e, id);
+    fetchUserAddToCart();
+  };
 
   const fetchData = async () => {
     setLoading(true);
@@ -61,7 +61,8 @@ const ProductDisplay = ({ category, heading }) => {
                 <Link
                   to={"/product/" + product?._id}
                   key={product._id}
-                  className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] bg-white rounded-sm shadow"  onClick={scrollBehavior}
+                  className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] bg-white rounded-sm shadow"
+                  onClick={scrollBehavior}
                 >
                   <div className="bg-slate-200 h-48 p-4 min-w-[280px] md:min-w-[145px] flex justify-center items-center">
                     <img
@@ -81,15 +82,16 @@ const ProductDisplay = ({ category, heading }) => {
                       <p className="text-cyan-500 font-medium">
                         {displayCurrency(product.sellingPrice)}
                       </p>
-
-                      <p className=" text-slate-500 line-through">
-                        {displayCurrency(product.price)}
-                      </p>
+                      {product.sellingPrice !== product.price && (
+                        <p className="text-slate-500 line-through">
+                          {displayCurrency(product.price)}
+                        </p>
+                      )}
                     </div>
 
                     <button
                       className="bg-cyan-500 hover:bg-cyan-600 text-sm text-white rounded-full px-3 py-1 flex gap-1 items-center justify-center"
-                      onClick={(e)=>addToCartHandler(e,product?._id)}
+                      onClick={(e) => addToCartHandler(e, product?._id)}
                     >
                       <BsCartPlus /> Add to Cart
                     </button>
@@ -98,7 +100,6 @@ const ProductDisplay = ({ category, heading }) => {
               );
             })}
       </div>
-      
     </div>
   );
 };

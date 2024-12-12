@@ -83,7 +83,8 @@ const VerticalCardProduct = ({ category, heading }) => {
             })
           : data.map((product, index) => {
               return (
-                <Link to={"product/"+product?._id}
+                <Link
+                  to={"product/" + product?._id}
                   key={product._id}
                   className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] bg-white rounded-sm shadow"
                 >
@@ -102,27 +103,20 @@ const VerticalCardProduct = ({ category, heading }) => {
                       {product?.category}
                     </p>
                     <div className="flex gap-3">
-                     {/* Check if sellingPrice is different from price */}
-                  {product.sellingPrice !== product.price && (
-                      <>
-                        <p className="text-cyan-500 font-medium">
-                          {displayCurrency(product.sellingPrice)}
-                        </p>
+                      <p className="text-cyan-500 font-medium">
+                        {displayCurrency(product.sellingPrice)}
+                      </p>
+                      {product.sellingPrice !== product.price && (
                         <p className="text-slate-500 line-through">
                           {displayCurrency(product.price)}
                         </p>
-                      </>
-                    )}
+                      )}
+                    </div>
 
-                    {/* If sellingPrice equals price, just display the selling price */}
-                    {product.sellingPrice === product.price && (
-                      <p className="text-red-500 font-medium">
-                        {displayCurrency(product.sellingPrice)}
-                      </p>
-                    )}
-                  </div>
-
-                    <button className="bg-cyan-500 hover:bg-cyan-600 text-sm text-white rounded-full px-3 py-1 flex gap-1 items-center justify-center" onClick={(e)=> addToCartHandler(e,product?._id)}>
+                    <button
+                      className="bg-cyan-500 hover:bg-cyan-600 text-sm text-white rounded-full px-3 py-1 flex gap-1 items-center justify-center"
+                      onClick={(e) => addToCartHandler(e, product?._id)}
+                    >
                       <BsCartPlus /> Add to Cart
                     </button>
                   </div>

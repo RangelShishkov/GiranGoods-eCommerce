@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
+
 import imageIphone from "../assets/banner/iphone-slider.webp";
 import imagePlaystation from "../assets/banner/playstation-slider.jpg";
 import imageCoffe from "../assets/banner/slider-coffe.jpg";
@@ -78,7 +79,7 @@ const SlidingBanner = () => {
               className="w-full h-full min-w-full min-h-full transition-all duration-500"
               style={{ transform: `translateX(-${currentImage * 100}%)` }}
             >
-              <img src={imageUrl} alt={`banner-${index}`} className="w-full h-full" />
+              <img src={imageUrl} alt={`banner-${index}`} className="w-full h-full" />  
             </div>
           ))}
         </div>

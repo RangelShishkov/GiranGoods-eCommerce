@@ -186,12 +186,14 @@ const ProductDetails = () => {
               <FaStarHalf />
             </div>
             <div className="flex items-center gap-2 text-2xl lg:text-3xl font-medium my-1">
-              <p className="text-cyan-600">
+              <p className="text-cyan-600 font-medium">
                 {displayCurrency(data?.sellingPrice)}
               </p>
-              <p className="text-slate-400 line-through">
-                {displayCurrency(data?.price)}
-              </p>
+              {data?.sellingPrice !== data?.price && (
+                <p className="text-slate-500 line-through">
+                  {displayCurrency(data?.price)}
+                </p>
+              )}
             </div>
             <div className="flex items-center gap-3 my-2">
               <button

@@ -6,15 +6,14 @@ import addToCart from "../helpers/addToCart";
 import { Link } from "react-router-dom";
 import { BsCartPlus } from "react-icons/bs";
 
-const VerticalCard = ({loading,data = []}) => {
+const VerticalCard = ({ loading, data = [] }) => {
   const loadingList = new Array(13).fill(null);
-  const {  fetchUserAddToCart } = useContext(Context);
+  const { fetchUserAddToCart } = useContext(Context);
 
-
-  const addToCartHandler = async(e,id) => {
-    await addToCart(e, id)
-    fetchUserAddToCart()
-  }
+  const addToCartHandler = async (e, id) => {
+    await addToCart(e, id);
+    fetchUserAddToCart();
+  };
 
   return (
     <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,300px))] justify-center md:justify-between md:gap-4 overflow-x-scroll scrollbar-none transition-all">
@@ -60,32 +59,20 @@ const VerticalCard = ({loading,data = []}) => {
                   </h2>
                   <p className="text-sm text-slate-400">{product?.category}</p>
                   <div className="flex gap-3">
-                    {/* Check if sellingPrice is different from price */}
-                  {product.sellingPrice !== product.price && (
-                      <>
-                        <p className="text-cyan-500 font-medium">
-                          {displayCurrency(product.sellingPrice)}
-                        </p>
-                        <p className="text-slate-500 line-through">
-                          {displayCurrency(product.price)}
-                        </p>
-                      </>
-                    )}
-
-                    {/* If sellingPrice equals price, just display the selling price */}
-                    {product.sellingPrice === product.price && (
-                      <p className="text-cyan-500 font-medium">
-                        {displayCurrency(product.sellingPrice)}
+                    <p className="text-cyan-500 font-medium">
+                      {displayCurrency(product.sellingPrice)}
+                    </p>
+                    {product.sellingPrice !== product.price && (
+                      <p className="text-slate-500 line-through">
+                        {displayCurrency(product.price)}
                       </p>
                     )}
                   </div>
-
                   <button
                     className="bg-cyan-500 hover:bg-cyan-600 text-sm text-white rounded-full px-3 py-1 flex gap-1 items-center justify-center"
                     onClick={(e) => addToCartHandler(e, product?._id)}
                   >
-                    <BsCartPlus
-                     /> Add to Cart
+                    <BsCartPlus /> Add to Cart
                   </button>
                 </div>
               </Link>

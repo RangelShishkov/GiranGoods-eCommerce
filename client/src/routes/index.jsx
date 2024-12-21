@@ -13,6 +13,7 @@ import Cart from "../pages/Cart";
 import SearchProduct from "../pages/SearchProduct";
 import Success from "../pages/Success";
 import Cancel from "../pages/Cancel";
+import OrderPage from "../pages/OrderPage";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "search",
         element: <SearchProduct />,
+      },
+      {
+        path: "order",
+        element: <OrderPage />
       },
       {
         path: "admin-panel",

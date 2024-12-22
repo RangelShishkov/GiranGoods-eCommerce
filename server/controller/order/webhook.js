@@ -16,9 +16,10 @@ async function getLineItems(lineItems) {
         name: product.name,
         price: item.price.unit_amount / 100,
         quantity: item.quantity,
-        image: product.image,
-      };
-      ProductItems.push(productData);
+        image: product.images,
+      }; 
+          
+      ProductItems.push(productData)
     }
   }
 
@@ -74,14 +75,10 @@ const webhook = async (request, response) => {
         totalAmount: session.amount_total / 100,
       };
 
-      const order = await orderModel(orderDetails);
+      const order = new orderModel(orderDetails);
       const saveOrder = await order.save();
       break;
-    case "payment_method.attached":
-      const paymentMethod = event.data.object;
-      // Then define and call a method to handle the successful attachment of a PaymentMethod.
-      // handlePaymentMethodAttached(paymentMethod);
-      break;
+    
     default:
       // Unexpected event type
       console.log(`Unhandled event type ${event.type}.`);

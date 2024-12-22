@@ -1,4 +1,5 @@
 const stripe = require("../../config/stripe");
+const cartProductModel = require("../../models/cartProductModel");
 const orderModel = require("../../models/orderProductModel");
 
 const endpointSecret = process.env.STRIPE_ENDPOINT_WEBHOOK;
@@ -17,9 +18,9 @@ async function getLineItems(lineItems) {
         price: item.price.unit_amount / 100,
         quantity: item.quantity,
         image: product.images,
-      }; 
-          
-      ProductItems.push(productData)
+      };
+
+      ProductItems.push(productData);
     }
   }
 
@@ -77,8 +78,15 @@ const webhook = async (request, response) => {
 
       const order = new orderModel(orderDetails);
       const saveOrder = await order.save();
+
+      if (saveOrder?._id) {
+        const deleteCartItems = await cartProductModel.deleteMany({
+          userId: session.metadata.userId,
+        });
+      }
+
       break;
-    
+
     default:
       // Unexpected event type
       console.log(`Unhandled event type ${event.type}.`);

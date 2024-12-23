@@ -8,7 +8,7 @@ import imageIron from "../assets/banner/slider-iutiq.png";
 import imageAirCon from "../assets/banner/slider-klimatik.jpg";
 import imagePhone from "../assets/banner/slider-phone.png";
 import imageTv from "../assets/banner/slider-tv.jpg";
-import imagePlaystationPro from "../assets/banner/ps5-pro_banner.jpg"
+import imagePlaystationPro from "../assets/banner/ps5-pro_banner.jpg";
 
 const SlidingBanner = () => {
   const [currentImage, setCurrentImage] = useState(0);
@@ -79,7 +79,11 @@ const SlidingBanner = () => {
               className="w-full h-full min-w-full min-h-full transition-all duration-500"
               style={{ transform: `translateX(-${currentImage * 100}%)` }}
             >
-              <img src={imageUrl} alt={`banner-${index}`} className="w-full h-full" />  
+              <img
+                src={imageUrl}
+                alt={`banner-${index}`}
+                className="w-full h-full"
+              />
             </div>
           ))}
         </div>
@@ -90,10 +94,10 @@ const SlidingBanner = () => {
         {deskImages.map((_, index) => (
           <div
             key={index}
-            onClick={() => handleDotClick(index)}  // Change image when dot is clicked
+            onClick={() => handleDotClick(index)} // Change image when dot is clicked
             className={`w-3 h-3 rounded-full cursor-pointer ${
               currentImage === index ? "bg-cyan-500" : "bg-gray-400"
-            }`}  // Style the active dot differently
+            }`} // Style the active dot differently
           ></div>
         ))}
       </div>

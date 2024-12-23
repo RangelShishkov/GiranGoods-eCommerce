@@ -88,15 +88,15 @@ const HorizontalCardProduct = ({ category, heading }) => {
                 <Link
                   to={"product/" + product?._id}
                   key={product._id}
-                  className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white rounded-sm shadow flex"
+                  className="w-full min-w-[280px] md:min-w-[320px]  max-w-[280px] md:max-w-[320px] group hover:shadow-2xl transition-all h-36 bg-white rounded-sm shadow flex"
                 >
-                  <div className="bg-slate-200 h-full p-4 min-w-[120px] md:min-w-[145px]">
+                  <div className="bg-slate-200 h-full p-4 min-w-[120px] md:min-w-[145px] overflow-hidden">
                     <img
                       src={product.productImage[0]}
-                      className="object-scale-down h-full hover:scale-110 transition-all"
+                      className="object-scale-down h-full group-hover:scale-110 transition-all mix-blend-multiply"
                     />
                   </div>
-                  <div className="p-4 grid ">
+                  <div className="p-4 grid">
                     <h2 className="font-semibold text-base md:text-lg text-ellipsis line-clamp-1 text-black">
                       {product.brandName + " "}
                       {product?.productName}

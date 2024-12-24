@@ -3,7 +3,7 @@ import Logo from "./Logo";
 import { GrSearch } from "react-icons/gr";
 import { FaRegUser } from "react-icons/fa6";
 import { PiShoppingCartSimple } from "react-icons/pi";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import SummaryApi from "../common";
 import { toast } from "react-toastify";
@@ -17,10 +17,7 @@ const Header = () => {
   const [menuDisplay, setMenuDisplay] = useState(false);
   const context = useContext(Context);
   const navigate = useNavigate();
-  const searchInput = useLocation();
-  const URLSearch = new URLSearchParams(searchInput?.search);
-  const searchQuery = URLSearch.getAll("q");
-  const [search, setSearch] = useState(searchQuery);
+  const [search, setSearch] = useState("");
 
   const logoutHandler = async () => {
     const fetchData = await fetch(SummaryApi.logout_user.url, {
@@ -40,13 +37,15 @@ const Header = () => {
     }
   };
 
-  const searchHandler = (e) => {
-    const { value } = e.target;
-    setSearch(value);
-    if (value) {
-      navigate(`/search?q=${value}`);
-    } else {
-      navigate("/search");
+  const handleSearchSubmit = () => {
+    if (search.trim()) {
+      navigate(`/search?q=${search}`);
+    }
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSearchSubmit();
     }
   };
 
@@ -64,13 +63,17 @@ const Header = () => {
             type="text"
             placeholder="Search..."
             className="w-full outline-none"
-            onChange={searchHandler}
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyPress={handleKeyPress}
             value={search}
           />
 
-          <div className="text-lg min-w-[50px] h-8 flex items-center justify-center rounded-r-full bg-cyan-500 text-white">
+          <button
+            className="text-lg min-w-[50px] h-8 flex items-center justify-center rounded-r-full bg-cyan-500 text-white"
+            onClick={handleSearchSubmit}
+          >
             <GrSearch />
-          </div>
+          </button>
         </div>
 
         <div className="flex items-center gap-5">

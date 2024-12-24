@@ -21,9 +21,7 @@ const CategoryProduct = () => {
   const [selectCategory, setSelectCategory] = useState(urlCategoryListObject);
   const [filterCategoryList, setFilterCategoryList] = useState([]);
 
-const [sortBy,setSortBy] = useState("")
-console.log("sortBy",sortBy);
-
+  const [sortBy, setSortBy] = useState("");
 
   const fetchData = async () => {
     const response = await fetch(SummaryApi.filterProduct.url, {
@@ -76,20 +74,18 @@ console.log("sortBy",sortBy);
   }, [selectCategory]);
 
   const onChangeSortHandler = (e) => {
-    const {value} = e.target
-    setSortBy(value)
-    if(value === "ascending") {
-      setData(preve => preve.sort((a,b)=>a.sellingPrice - b.sellingPrice))
+    const { value } = e.target;
+    setSortBy(value);
+    if (value === "ascending") {
+      setData((preve) => preve.sort((a, b) => a.sellingPrice - b.sellingPrice));
     }
 
-    if(value === "descending") {
-      setData(preve => preve.sort((a,b)=>b.sellingPrice - a.sellingPrice))
+    if (value === "descending") {
+      setData((preve) => preve.sort((a, b) => b.sellingPrice - a.sellingPrice));
     }
-  }
+  };
 
-  useEffect(()=>{
-
-  },[sortBy])
+  useEffect(() => {}, [sortBy]);
   return (
     <div className="container mx-auto p-4">
       {/*  desktop version */}
@@ -103,12 +99,24 @@ console.log("sortBy",sortBy);
             </h3>
             <form className="text-sm flex flex-col gap-2 py-2">
               <div className="flex items-center gap-2">
-                <input type="radio" name="sortBy" checked={sortBy === "ascending"} value={"ascending"} onChange={onChangeSortHandler} />
+                <input
+                  type="radio"
+                  name="sortBy"
+                  checked={sortBy === "ascending"}
+                  value={"ascending"}
+                  onChange={onChangeSortHandler}
+                />
                 <label htmlFor="">Price - Low to High</label>
               </div>
 
               <div className="flex items-center gap-2">
-                <input type="radio" name="sortBy" checked={sortBy === "descending"} value={"descending"} onChange={onChangeSortHandler} />
+                <input
+                  type="radio"
+                  name="sortBy"
+                  checked={sortBy === "descending"}
+                  value={"descending"}
+                  onChange={onChangeSortHandler}
+                />
                 <label htmlFor="">Price - High to Low</label>
               </div>
             </form>

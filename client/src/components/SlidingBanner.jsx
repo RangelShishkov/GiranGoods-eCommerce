@@ -1,31 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
+import { Link } from "react-router-dom"; // Import Link component for navigation
 
 import imageIphone from "../assets/banner/iphone-slider.webp";
 import imagePlaystation from "../assets/banner/playstation-slider.jpg";
 import imageCoffe from "../assets/banner/slider-coffe.jpg";
 import imageIron from "../assets/banner/slider-iutiq.png";
-import imageAirCon from "../assets/banner/slider-klimatik.jpg";
-import imagePhone from "../assets/banner/slider-phone.png";
+import imageWatch from "../assets/banner/watch-slider.jpg";
+import imagePhone from "../assets/banner/phone-slider.jpg";
 import imageTv from "../assets/banner/slider-tv.jpg";
-import imagePlaystationPro from "../assets/banner/ps5-pro_banner.jpg";
+import imageIntel from "../assets/banner/intel-slider.jpeg";
 
 const SlidingBanner = () => {
   const [currentImage, setCurrentImage] = useState(0);
+
+  // Array of images
   const deskImages = [
-    imageIphone,
+    imagePhone,
     imagePlaystation,
-    imagePlaystationPro,
+    imageIntel,
+    imageIphone,
+    imageTv,
+    imageWatch,
     imageCoffe,
     imageIron,
-    imageAirCon,
-    imagePhone,
-    imageTv,
+  ];
+
+  // Array of URLs for each product category
+  const links = [
+    "/product-category?category=phone",
+    "/product-category?category=television",
+    "/product-category?category=processor",
+    "/product-category?category=phone",
+    "/product-category?category=television",
+    "/product-category?category=watches",
+    "/product-category?category=speaker",
+    "/product-category?category=trimmer",
   ];
 
   const nextImage = () => {
     if (deskImages.length - 1 > currentImage) {
       setCurrentImage((prev) => prev + 1);
+    } else {
+      setCurrentImage(0);
     }
   };
 
@@ -54,17 +71,17 @@ const SlidingBanner = () => {
     <div className="container mx-auto px-4 rounded">
       <div className="h-60 md:h-96 w-full bg-slate-200 relative">
         {/* Arrow buttons for navigation */}
-        <div className="absolute z-10 h-full w-full md:flex items-center hidden">
+        <div className="absolute h-full w-full md:flex items-center hidden">
           <div className="flex justify-between w-full text-3xl">
             <button
               onClick={previousImage}
-              className="bg-white shadow-md rounded-full p-1"
+              className="bg-white shadow-md rounded-full p-1 z-10"
             >
               <FaAngleLeft />
             </button>
             <button
               onClick={nextImage}
-              className="bg-white shadow-md rounded-full p-1"
+              className="bg-white shadow-md rounded-full p-1 z-10"
             >
               <FaAngleRight />
             </button>
@@ -79,11 +96,14 @@ const SlidingBanner = () => {
               className="w-full h-full min-w-full min-h-full transition-all duration-500"
               style={{ transform: `translateX(-${currentImage * 100}%)` }}
             >
-              <img
-                src={imageUrl}
-                alt={`banner-${index}`}
-                className="w-full h-full"
-              />
+              {/* Wrap each image with a Link */}
+              <Link to={links[index]}> 
+                <img
+                  src={imageUrl}
+                  alt={`banner-${index}`}
+                  className="w-full h-full"
+                />
+              </Link>
             </div>
           ))}
         </div>

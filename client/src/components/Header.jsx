@@ -69,7 +69,7 @@ const Header = () => {
           />
 
           <button
-            className="text-lg min-w-[50px] h-8 flex items-center justify-center rounded-r-full bg-cyan-500 text-white"
+            className="text-lg min-w-[50px]  h-8 flex items-center justify-center rounded-r-full bg-cyan-500 hover:bg-cyan-600 text-white"
             onClick={handleSearchSubmit}
           >
             <GrSearch />

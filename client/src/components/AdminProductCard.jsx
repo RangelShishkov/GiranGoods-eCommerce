@@ -1,10 +1,41 @@
 import React, { useState } from "react";
-import { MdEdit } from "react-icons/md";
+import { MdEdit, MdDelete } from "react-icons/md";
 import AdminEditProduct from "./AdminEditProduct";
 import displayCurrency from "../helpers/displayCurrency";
+import SummaryApi from "../common";
 
 const AdminProductCard = ({ data, fetchData }) => {
   const [editProduct, setEditProduct] = useState(false);
+
+  // Function to handle product deletion
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete "${data.productName}"?`
+    );
+    if (confirmDelete) {
+      try {
+        // Replace the URL with your API endpoint for deletion
+        const response = await fetch(SummaryApi.deleteProduct.url, {
+          method: SummaryApi.deleteProduct.method,
+          credentials: "include",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+        if (response.ok) {
+          alert("Product deleted successfully.");
+          fetchData(); // Refresh the product list after deletion
+        } else {
+          alert("Failed to delete the product.");
+        }
+      } catch (error) {
+        console.error("Error deleting product:", error);
+        alert("An error occurred while deleting the product.");
+      }
+    }
+  };
+
   return (
     <div className="bg-white p-4 rounded">
       <div className="w-36">
@@ -27,11 +58,19 @@ const AdminProductCard = ({ data, fetchData }) => {
             </p>
           </div>
 
-          <div
-            className="w-fit ml-auto p-2 hover:bg-cyan-500 rounded-full hover:text-white cursor-pointer"
-            onClick={() => setEditProduct(true)}
-          >
-            <MdEdit />
+          <div className="flex justify-end gap-2 mt-2">
+            <div
+              className="p-2 hover:bg-cyan-500 rounded-full hover:text-white cursor-pointer"
+              onClick={() => setEditProduct(true)}
+            >
+              <MdEdit />
+            </div>
+            <div
+              className="p-2 hover:bg-red-500 rounded-full hover:text-white cursor-pointer"
+              onClick={handleDelete}
+            >
+              <MdDelete />
+            </div>
           </div>
         </div>
       </div>

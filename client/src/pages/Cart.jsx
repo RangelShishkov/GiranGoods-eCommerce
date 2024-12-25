@@ -3,7 +3,7 @@ import SummaryApi from "../common";
 import Context from "../context";
 import displayCurrency from "../helpers/displayCurrency";
 import { MdDelete } from "react-icons/md";
-import {loadStripe} from '@stripe/stripe-js';
+import { loadStripe } from "@stripe/stripe-js";
 
 const Cart = () => {
   const [data, setData] = useState([]);
@@ -94,8 +94,9 @@ const Cart = () => {
   };
 
   const paymentHandler = async () => {
-
-    const stripePromise = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+    const stripePromise = await loadStripe(
+      import.meta.env.VITE_STRIPE_PUBLIC_KEY
+    );
 
     const response = await fetch(SummaryApi.payment.url, {
       method: SummaryApi.payment.method,
@@ -109,8 +110,8 @@ const Cart = () => {
     });
     const responseData = await response.json();
 
-    if(responseData?.id){
-      stripePromise.redirectToCheckout({sessionId: responseData.id})
+    if (responseData?.id) {
+      stripePromise.redirectToCheckout({ sessionId: responseData.id });
     }
 
     console.log("payment repsnse", responseData);
@@ -125,7 +126,7 @@ const Cart = () => {
     0
   );
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto  ">
       <div className="text-center text-lg my-3">
         {data.length === 0 && !loading && (
           <p className="bg-white py-5">No items in cart</p>
@@ -139,7 +140,7 @@ const Cart = () => {
                 return (
                   <div
                     key={el + "add to cart" + index}
-                    className="w-full bg-slate-200 h-32 my-3 border border-slate-300 animate-pulse rounded"
+                    className="w-full  bg-slate-200 h-32 my-3 border border-slate-300 animate-pulse rounded"
                   ></div>
                 );
               })

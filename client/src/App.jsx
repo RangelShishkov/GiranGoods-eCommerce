@@ -14,7 +14,7 @@ import BackToTopButton from "./components/BackToTop";
 
 function App() {
   const dispatch = useDispatch();
-  const [cartProductCount, setCartProductCount] = useState(0)
+  const [cartProductCount, setCartProductCount] = useState(0);
 
   const fetchUserDetails = async () => {
     const dataResponse = await fetch(SummaryApi.current_user.url, {
@@ -33,17 +33,17 @@ function App() {
       method: SummaryApi.addToCartProductCount.method,
       credentials: "include",
     });
-    
+
     const dataApi = await dataResponse.json();
     // console.log("dataAPi", dataApi)
-    setCartProductCount(dataApi?.data?.count)
+    setCartProductCount(dataApi?.data?.count);
   };
 
   useEffect(() => {
     // user details
     fetchUserDetails();
     // user details for cart products
-    fetchUserAddToCart()
+    fetchUserAddToCart();
   }, []);
   return (
     <>
@@ -51,19 +51,18 @@ function App() {
         value={{
           fetchUserDetails, //fetch user data
           cartProductCount, //current user - products in cart count
-          fetchUserAddToCart
+          fetchUserAddToCart,
         }}
       >
-        <ToastContainer 
-        position="top-center"
-        />
-
-        <Header />
-        <main className="min-h-[calc(100vh-120px)] pt-16">
-          <Outlet />
-        </main>
-        <Footer />
-        <BackToTopButton />
+        <ToastContainer position="top-center" />
+        <div className="flex flex-col min-h-screen">
+          <Header />
+          <main className="flex-grow pt-16">
+            <Outlet />
+          </main>
+          <Footer />
+          <BackToTopButton />
+        </div>
       </Context.Provider>
     </>
   );

@@ -14,7 +14,6 @@ const AdminProductCard = ({ data, fetchData }) => {
     );
     if (confirmDelete) {
       try {
-        // Replace the URL with your API endpoint for deletion
         const response = await fetch(SummaryApi.deleteProduct.url, {
           method: SummaryApi.deleteProduct.method,
           credentials: "include",
@@ -48,8 +47,11 @@ const AdminProductCard = ({ data, fetchData }) => {
             height={120}
           />
         </div>
-        <h1 className="text-ellipsis line-clamp-2">
-          {data.brandName} {data.productName}
+        <h1 className="text-ellipsis line-clamp-2 overflow-hidden whitespace-nowrap">
+          {data.brandName} 
+        </h1>
+        <h1 className="text-ellipsis line-clamp-2 overflow-hidden whitespace-nowrap">
+          {data.productName}
         </h1>
         <div>
           <div>
@@ -58,7 +60,7 @@ const AdminProductCard = ({ data, fetchData }) => {
             </p>
           </div>
 
-          <div className="flex justify-end gap-2 mt-2">
+          <div className="flex justify-evenly gap-2 mt-2">
             <div
               className="p-2 hover:bg-cyan-500 rounded-full hover:text-white cursor-pointer"
               onClick={() => setEditProduct(true)}

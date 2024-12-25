@@ -26,6 +26,7 @@ const paymentController = require("../controller/order/paymentController");
 const webhook = require("../controller/order/webhook");
 const orderController = require("../controller/order/orderController");
 const deleteProductController = require("../controller/product/deleteProduct");
+const deleteUserController = require("../controller/user/deleteUser");
 
 router.post("/signup", userSignUpController);
 router.post("/signin", userSignInController);
@@ -35,6 +36,7 @@ router.get("/logout", userLogout);
 //admin panel
 router.get("/all-users", allUsers);
 router.post("/update-user", authToken, updateUser);
+router.delete("/delete-user/:id",authToken, deleteUserController)
 
 //product
 router.post("/upload-product", authToken, uploadProductController);

@@ -1,9 +1,9 @@
-const uploadProductPermission = require("../../helpers/permission");
+const updateProductPermission = require("../../helpers/permission");
 const productModel = require("../../models/productModel");
 
 async function updateProductController(req, res) {
   try {
-    if (!uploadProductPermission(req.userId)) {
+    if (!updateProductPermission(req.userId)) {
       throw new Error("Permission denied");
     }
 
@@ -12,7 +12,7 @@ async function updateProductController(req, res) {
     const updateProduct = await productModel.findByIdAndUpdate(_id, resBody);
 
     res.json({
-      message: "product updated successfully",
+      message: "Product updated successfully",
       data: updateProduct,
       success: true,
       error: false,

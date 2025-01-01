@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import Logo from "./Logo";
 import { GrSearch } from "react-icons/gr";
 import { FaRegUser } from "react-icons/fa6";
@@ -18,6 +18,61 @@ const Header = () => {
   const context = useContext(Context);
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const dropdownRef = useRef(null);
+  
+
+  useEffect(() => {
+    const fetchSearchResults = async () => {
+      if (!search.trim()) {
+        setSuggestions([]); // Clear suggestions for empty input
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          `${SummaryApi.searchProduct.url}?q=${encodeURIComponent(
+            search.trim()
+          )}`
+        );
+        const data = await response.json();
+
+        const results = Array.isArray(data?.data) ? data.data : [];
+        setSuggestions(results.slice(0, 3)); // Take the first X items
+      } catch (error) {
+        console.error("Error fetching search suggestions:", error);
+      }
+    };
+
+    fetchSearchResults();
+  }, [search]);
+
+  const handleSearchSubmit = () => {
+    if (search.trim()) {
+      navigate(`/search?q=${search}`);
+      setSuggestions([]);  // Close suggestions after search
+    }
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSearchSubmit();
+    }
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setSuggestions([]);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+ 
 
   const logoutHandler = async () => {
     const fetchData = await fetch(SummaryApi.logout_user.url, {
@@ -37,51 +92,70 @@ const Header = () => {
     }
   };
 
-  const handleSearchSubmit = () => {
-    if (search.trim()) {
-      navigate(`/search?q=${search}`);
-    }
-  };
-
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      handleSearchSubmit();
-    }
-  };
-
   return (
     <header className="h-16 shadow-md bg-white fixed w-full z-40">
       <div className="h-full container mx-auto flex items-center px-4 justify-between">
-        <div className=" ">
+        <div>
           <Link to={"/"}>
             <Logo width={160} height={60} />
           </Link>
         </div>
 
-        <div className="hidden lg:flex items-center w-full justify-between max-w-sm border rounded-full focus-within:shadow-sm focus-within:border-1 focus-within:border-black pl-3">
+        <div className="relative hidden lg:flex items-center w-full justify-between max-w-sm border rounded-full focus-within:shadow-sm focus-within:border-1 focus-within:border-black pl-3">
           <input
             type="text"
             placeholder="Search..."
             className="w-full outline-none"
             onChange={(e) => setSearch(e.target.value)}
-            onKeyPress={handleKeyPress}
+            onKeyUp={handleKeyPress}
             value={search}
           />
-
           <button
-            className="text-lg min-w-[50px]  h-8 flex items-center justify-center rounded-r-full bg-cyan-500 hover:bg-cyan-600 text-white"
+            className="text-lg min-w-[50px] h-8 flex items-center justify-center rounded-r-full bg-cyan-500 hover:bg-cyan-600 text-white"
             onClick={handleSearchSubmit}
           >
             <GrSearch />
           </button>
+          {suggestions.length > 0 && (
+            <div ref={dropdownRef} className="absolute top-full left-0 bg-white border border-gray-300 rounded shadow-md w-full max-h-60 overflow-auto">
+              {suggestions.map((suggestion, index) => (
+                <div
+                  key={suggestion._id || index}
+                  className="p-2 hover:bg-gray-100 border-b-2 cursor-pointer"
+                  onClick={() => {
+                    setSearch("");
+                    setSuggestions([]);
+                    navigate(`/product/${suggestion._id}`);
+                  }}
+                >
+                  <div className="flex items-center p-2 hover:bg-gray-100 cursor-pointer">
+                    <img
+                      src={suggestion.productImage[0]}
+                      alt={suggestion.productName}
+                      className="w-10 h-10 rounded mr-3 scale-110 object-fit"
+                    />
+
+                    <div className="flex flex-col">
+                      <span className="font-medium">
+                        {suggestion.brandName + " "}
+                        {suggestion.productName}
+                      </span>
+                      <span className="text-sm text-gray-500 italic">
+                        {suggestion.category}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="flex items-center gap-5">
           {user?._id && (
             <Link to={"/cart"} className="text-2xl relative cursor-pointer">
               <PiShoppingCartSimple />
-
-              <div className="bg-cyan-600 text-white w-5 h-5 rounded-full p-1 flex items-center justify-center absolute -top-2 -right-3 ">
+              <div className="bg-cyan-600 text-white w-5 h-5 rounded-full p-1 flex items-center justify-center absolute -top-2 -right-3">
                 <p className="text-sm">{context?.cartProductCount}</p>
               </div>
             </Link>

@@ -16,7 +16,7 @@ const VerticalCard = ({ loading, data = [] }) => {
   };
 
   return (
-    <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,300px))] justify-center md:justify-between md:gap-4 overflow-x-scroll scrollbar-none transition-all">
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,300px))] justify-center md:justify-evenly md:gap-4 overflow-x-scroll scrollbar-none transition-all">
       {loading
         ? loadingList.map((product, index) => {
             return (
@@ -43,13 +43,13 @@ const VerticalCard = ({ loading, data = [] }) => {
               <Link
                 to={"/product/" + product?._id}
                 key={product._id}
-                className="w-full min-w-[280px] md:min-w-[300px] max-w-[280px] md:max-w-[300px] bg-white rounded-sm shadow"
+                className="w-full min-w-[280px] md:min-w-[300px] max-w-[280px] md:max-w-[300px] group hover:shadow-xl transition-all bg-white rounded-sm shadow"
                 onClick={scrollBehavior}
               >
                 <div className="bg-slate-200 h-48 p-4 min-w-[280px] md:min-w-[145px] flex justify-center items-center">
                   <img
                     src={product?.productImage[0]}
-                    className="object-scale-down h-full hover:scale-110 transition-all mix-blend-multiply"
+                    className="object-scale-down h-full  group-hover:scale-110 transition-all  mix-blend-multiply"
                   />
                 </div>
                 <div className="p-4 grid gap-2 ">

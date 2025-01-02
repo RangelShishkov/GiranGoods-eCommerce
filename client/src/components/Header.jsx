@@ -20,7 +20,7 @@ const Header = () => {
   const [search, setSearch] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const dropdownRef = useRef(null);
-  
+  const menuRef = useRef(null); // Ref for the user menu dropdown
 
   useEffect(() => {
     const fetchSearchResults = async () => {
@@ -50,7 +50,7 @@ const Header = () => {
   const handleSearchSubmit = () => {
     if (search.trim()) {
       navigate(`/search?q=${search}`);
-      setSuggestions([]);  // Close suggestions after search
+      setSuggestions([]); // Close suggestions after search
     }
   };
 
@@ -62,8 +62,12 @@ const Header = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (
+        (dropdownRef.current && !dropdownRef.current.contains(event.target)) ||
+        (menuRef.current && !menuRef.current.contains(event.target))
+      ) {
         setSuggestions([]);
+        setMenuDisplay(false);
       }
     };
 
@@ -72,7 +76,6 @@ const Header = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
- 
 
   const logoutHandler = async () => {
     const fetchData = await fetch(SummaryApi.logout_user.url, {
@@ -97,7 +100,7 @@ const Header = () => {
       <div className="h-full container mx-auto flex items-center px-4 justify-between">
         <div>
           <Link to={"/"}>
-            <Logo width={160} height={60} />
+            <Logo width={175} />
           </Link>
         </div>
 
@@ -117,7 +120,10 @@ const Header = () => {
             <GrSearch />
           </button>
           {suggestions.length > 0 && (
-            <div ref={dropdownRef} className="absolute top-full left-0 bg-white border border-gray-300 rounded shadow-md w-full max-h-60 overflow-auto">
+            <div
+              ref={dropdownRef}
+              className="absolute top-full left-0 bg-white border border-gray-300 rounded shadow-md w-full max-h-60 overflow-auto"
+            >
               {suggestions.map((suggestion, index) => (
                 <div
                   key={suggestion._id || index}
@@ -163,6 +169,7 @@ const Header = () => {
 
           {user?._id && (
             <div
+              ref={menuRef}
               className="text-xl cursor-pointer"
               onClick={() => setMenuDisplay((preve) => !preve)}
             >

@@ -15,11 +15,11 @@ import Success from "../pages/Success";
 import Cancel from "../pages/Cancel";
 import OrderPage from "../pages/OrderPage";
 
-import AuthGuard from "../components/AuthGuard";
-import AdminGuard from "../components/AdminGuard";
-import UnauthGuard from "../components/UnauthGuard";
-import PaymentSuccessGuard from "../components/PaymentSuccessGuard";
-import PaymentCancelGuard from "../components/PaymentCancelGuard";
+import AuthGuard from "../guards/AuthGuard";
+import AdminGuard from "../guards/AdminGuard";
+import UnauthGuard from "../guards/UnauthGuard";
+import PaymentSuccessGuard from "../guards/PaymentSuccessGuard";
+import PaymentCancelGuard from "../guards/PaymentCancelGuard";
 
 const router = createBrowserRouter([
   {

@@ -1,14 +1,13 @@
 import React from "react";
 
-const Logo = ({width, height}) => {
+const Logo = ({width}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      xmlns:svgjs="http://svgjs.dev/svgjs"
       width={width}
-      height={height}
+      
       viewBox="0 0 2000 368"
     >
       <g transform="matrix(1,0,0,1,-1.2121212121212466,-0.8446758489226909)">

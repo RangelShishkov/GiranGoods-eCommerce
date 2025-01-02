@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import successAnim from "../assets/success.gif";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clearPaymentSuccess } from "../store/paymentSlice";
 
 const Success = () => {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Clear payment state on mount
+    dispatch(clearPaymentSuccess());
+  }, [dispatch]);
+
   return (
     <div className="bg-slate-200 w-full max-w-md mx-auto flex justify-center items-center flex-col p-4 m-2 rounded">
       <img src={successAnim} alt="success animation" width={150} height={150} />

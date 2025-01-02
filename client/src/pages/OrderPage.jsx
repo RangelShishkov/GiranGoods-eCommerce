@@ -15,7 +15,6 @@ const OrderPage = () => {
 
     setData(responseData.data);
 
-    console.log("order list", responseData);
   };
 
   useEffect(() => {

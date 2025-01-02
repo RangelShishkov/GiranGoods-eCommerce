@@ -15,6 +15,12 @@ import Success from "../pages/Success";
 import Cancel from "../pages/Cancel";
 import OrderPage from "../pages/OrderPage";
 
+import AuthGuard from "../components/AuthGuard";
+import AdminGuard from "../components/AdminGuard";
+import UnauthGuard from "../components/UnauthGuard";
+import PaymentSuccessGuard from "../components/PaymentSuccessGuard";
+import PaymentCancelGuard from "../components/PaymentCancelGuard";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,15 +32,27 @@ const router = createBrowserRouter([
       },
       {
         path: "login",
-        element: <Login />,
+        element: (
+          <UnauthGuard>
+            <Login />
+          </UnauthGuard>
+        ),
       },
       {
         path: "forgot-password",
-        element: <ForgotPassword />,
+        element: (
+          <UnauthGuard>
+            <ForgotPassword />
+          </UnauthGuard>
+        ),
       },
       {
         path: "sign-up",
-        element: <SignUp />,
+        element: (
+          <UnauthGuard>
+            <SignUp />
+          </UnauthGuard>
+        ),
       },
       {
         path: "product-category",
@@ -46,15 +64,27 @@ const router = createBrowserRouter([
       },
       {
         path: "cart",
-        element: <Cart />,
+        element: (
+          <AuthGuard>
+            <Cart />
+          </AuthGuard>
+        ),
       },
       {
         path: "success",
-        element: <Success />
+        element: (
+          <PaymentSuccessGuard>
+            <Success />
+          </PaymentSuccessGuard>
+        ),
       },
       {
         path: "cancel",
-        element: <Cancel />
+        element: (
+          <PaymentCancelGuard>
+            <Cancel />
+          </PaymentCancelGuard>
+        ),
       },
       {
         path: "search",
@@ -62,19 +92,35 @@ const router = createBrowserRouter([
       },
       {
         path: "order",
-        element: <OrderPage />
+        element: (
+          <AuthGuard>
+            <OrderPage />
+          </AuthGuard>
+        ),
       },
       {
         path: "admin-panel",
-        element: <AdminPanel />,
+        element: (
+          <AdminGuard>
+            <AdminPanel />
+          </AdminGuard>
+        ),
         children: [
           {
             path: "all-users",
-            element: <AllUsers />,
+            element: (
+              <AdminGuard>
+                <AllUsers />
+              </AdminGuard>
+            ),
           },
           {
             path: "all-products",
-            element: <AllProducts />,
+            element: (
+              <AdminGuard>
+                <AllProducts />
+              </AdminGuard>
+            ),
           },
         ],
       },

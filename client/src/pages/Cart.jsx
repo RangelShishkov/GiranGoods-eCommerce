@@ -5,10 +5,14 @@ import displayCurrency from "../helpers/displayCurrency";
 import { MdDelete } from "react-icons/md";
 import { loadStripe } from "@stripe/stripe-js";
 
+import { setPaymentAttempt, setPaymentSuccess } from "../store/paymentSlice";
+import { useDispatch } from "react-redux";
+
 const Cart = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const context = useContext(Context);
+  const dispatch = useDispatch();
 
   const loadingCart = new Array(context.cartProductCount).fill(null);
 
@@ -94,6 +98,9 @@ const Cart = () => {
   };
 
   const paymentHandler = async () => {
+    dispatch(setPaymentAttempt(true)); // Set payment attempt flag
+    localStorage.setItem("paymentAttempt", "true"); // Persist state
+
     const stripePromise = await loadStripe(
       import.meta.env.VITE_STRIPE_PUBLIC_KEY
     );
@@ -111,10 +118,10 @@ const Cart = () => {
     const responseData = await response.json();
 
     if (responseData?.id) {
+      dispatch(setPaymentSuccess(true));
+      localStorage.setItem("paymentSuccess", "true");
       stripePromise.redirectToCheckout({ sessionId: responseData.id });
     }
-
-    console.log("payment repsnse", responseData);
   };
 
   const totalQty = data.reduce(

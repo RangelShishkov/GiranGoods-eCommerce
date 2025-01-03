@@ -32,28 +32,33 @@ const ProductDetails = () => {
   const { fetchUserAddToCart } = useContext(Context);
   const navigate = useNavigate();
 
-  const fetchProductDetails = async () => {
+  const fetchProductDetails = useCallback(async () => {
     setLoading(true);
-    const response = await fetch(SummaryApi.productDetails.url, {
-      method: SummaryApi.productDetails.method,
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        productId: params?.id,
-      }),
-    });
-    setLoading(false);
+    try {
+      const response = await fetch(SummaryApi.productDetails.url, {
+        method: SummaryApi.productDetails.method,
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          productId: params?.id,
+        }),
+      });
 
-    const dataResponse = await response.json();
+      const dataResponse = await response.json();
 
-    setData(dataResponse?.data);
-    setActiveImage(dataResponse?.data.productImage[0]);
-  };
+      setData(dataResponse?.data);
+      setActiveImage(dataResponse?.data.productImage[0]);
+    } catch (error) {
+      console.error("Failed to fetch product details:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [params?.id]); // Only depends on params?.id
 
   useEffect(() => {
     fetchProductDetails();
-  }, [params]);
+  }, [fetchProductDetails]);
 
   const onImageHoverHandle = (imageURL) => {
     setActiveImage(imageURL);

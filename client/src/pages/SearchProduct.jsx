@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import SummaryApi from "../common";
 import VerticalCard from "../components/VerticalCard";
@@ -8,19 +8,23 @@ const SearchProduct = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchProduct = async () => {
+  const fetchProduct = useCallback(async () => {
     setLoading(true);
-    const response = await fetch(SummaryApi.searchProduct.url + query.search);
-    const dataResponse = await response.json();
-    setLoading(false);
-
-    setData(dataResponse.data);
-  };
+    try {
+      const response = await fetch(SummaryApi.searchProduct.url + query.search);
+      const dataResponse = await response.json();
+      setData(dataResponse.data);
+    } catch (error) {
+      console.error("Failed to fetch product:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [query.search]); // Memoized to depend on query.search
 
   useEffect(() => {
     fetchProduct();
-  }, [query]);
-
+  }, [fetchProduct]); // Now fetchProduct is stable
+  
   return (
     <div className="container mx-auto p-4">
       {loading && <p className="text-lg text-center">Loading...</p>}

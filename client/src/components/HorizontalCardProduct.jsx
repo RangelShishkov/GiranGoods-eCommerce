@@ -29,10 +29,11 @@ const HorizontalCardProduct = ({ category, heading }) => {
 
     setData(categoryProduct?.data);
   };
-
+  
+  
   useEffect(() => {
     fetchData();
-  }, []);
+  },[]);
 
   const scrollRight = () => {
     scrollElement.current.scrollLeft += 350;

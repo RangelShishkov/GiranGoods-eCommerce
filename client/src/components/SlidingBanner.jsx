@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 import { Link } from "react-router-dom"; // Import Link component for navigation
 
@@ -38,30 +38,27 @@ const SlidingBanner = () => {
     "/product-category?category=trimmer",
   ];
 
-  const nextImage = () => {
+  const nextImage = useCallback(() => {
     if (deskImages.length - 1 > currentImage) {
       setCurrentImage((prev) => prev + 1);
     } else {
       setCurrentImage(0);
     }
-  };
+  }, [currentImage, deskImages.length]);
 
-  const previousImage = () => {
+  const previousImage = useCallback(() => {
     if (currentImage !== 0) {
       setCurrentImage((prev) => prev - 1);
     }
-  };
+  }, [currentImage]);
 
+  // Set up the interval effect
   useEffect(() => {
     const interval = setInterval(() => {
-      if (deskImages.length - 1 > currentImage) {
-        nextImage();
-      } else {
-        setCurrentImage(0);
-      }
+      nextImage();
     }, 5000);
     return () => clearInterval(interval);
-  }, [currentImage, deskImages.length]);
+  }, [nextImage]);
 
   const handleDotClick = (index) => {
     setCurrentImage(index);
@@ -97,7 +94,7 @@ const SlidingBanner = () => {
               style={{ transform: `translateX(-${currentImage * 100}%)` }}
             >
               {/* Wrap each image with a Link */}
-              <Link to={links[index]}> 
+              <Link to={links[index]}>
                 <img
                   src={imageUrl}
                   alt={`banner-${index}`}

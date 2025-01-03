@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import productCategory from "../helpers/productCategory";
 import VerticalCard from "../components/VerticalCard";
 import SummaryApi from "../common";
+import { debounce } from "lodash"
 
 const CategoryProduct = () => {
   const [data, setData] = useState([]);
@@ -23,20 +24,6 @@ const CategoryProduct = () => {
 
   const [sortBy, setSortBy] = useState("");
 
-  const fetchData = async () => {
-    const response = await fetch(SummaryApi.filterProduct.url, {
-      method: SummaryApi.filterProduct.method,
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        category: filterCategoryList,
-      }),
-    });
-    const dataResponse = await response.json();
-    setData(dataResponse?.data || []);
-  };
-
   const selectCategoryHandler = (e) => {
     const { name, value, checked } = e.target;
     setSelectCategory((preve) => {
@@ -48,8 +35,26 @@ const CategoryProduct = () => {
   };
 
   useEffect(() => {
+    const fetchData = debounce(async () => {
+      const response = await fetch(SummaryApi.filterProduct.url, {
+        method: SummaryApi.filterProduct.method,
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          category: filterCategoryList,
+        }),
+      });
+      const dataResponse = await response.json();
+      setData(dataResponse?.data || []);
+    }, 50); // 50ms debounce delay
+
     fetchData();
-  }, [filterCategoryList,fetchData]);
+
+    // Cleanup the debounce function
+    return () => fetchData.cancel();
+  }, [filterCategoryList]);
+
 
   useEffect(() => {
     const arrayOfCategory = Object.keys(selectCategory)

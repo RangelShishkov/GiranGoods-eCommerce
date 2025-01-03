@@ -42,9 +42,9 @@ function App() {
     // user details
     fetchUserDetails();
     // user details for cart products
-    fetchUserAddToCart();
-  }, []);
-  return (
+    fetchUserAddToCart(); // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]); 
+  return ( 
     <>
       <Context.Provider
         value={{

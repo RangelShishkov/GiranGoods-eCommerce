@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useCallback, useContext, useEffect, useRef, useState } from "react";
 import fetchCategoryProducts from "../helpers/fetchCategoryProducts";
 import displayCurrency from "../helpers/displayCurrency";
 import { BsCartPlus } from "react-icons/bs";
@@ -22,16 +22,19 @@ const VerticalCardProduct = ({ category, heading }) => {
     fetchUserAddToCart();
   };
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
-    const categoryProduct = await fetchCategoryProducts(category);
-    setLoading(false);
-    setData(categoryProduct?.data);
-  };
+    try {
+      const categoryProduct = await fetchCategoryProducts(category);
+      setData(categoryProduct?.data);
+    } finally {
+      setLoading(false);
+    }
+  }, [category]); 
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]); 
 
   const scrollRight = () => {
     scrollElement.current.scrollLeft += 350;

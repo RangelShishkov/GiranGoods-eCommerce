@@ -23,13 +23,15 @@ const SearchProduct = () => {
 
   useEffect(() => {
     fetchProduct();
-  }, [fetchProduct]); // Now fetchProduct is stable
-  
+  }, [fetchProduct]);
+
   return (
     <div className="container mx-auto p-4">
       {loading && <p className="text-lg text-center">Loading...</p>}
 
-      <p className="text-lg font-semibold my-3">Search Result : {data.length} </p>
+      <p className="text-lg font-semibold my-3">
+        Search Result : {data.length}{" "}
+      </p>
 
       {data.length === 0 && !loading && (
         <p className="bg-white text-lg text-center p-4">No search results </p>

@@ -62,16 +62,20 @@ const Header = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        (dropdownRef.current && !dropdownRef.current.contains(event.target)) ||
-        (menuRef.current && !menuRef.current.contains(event.target))
-      ) {
-        setSuggestions([]);
-        setMenuDisplay(false);
+      const isClickOutsideDropdown = dropdownRef.current && !dropdownRef.current.contains(event.target);
+      const isClickOutsideMenu = menuRef.current && !menuRef.current.contains(event.target);
+
+      if (isClickOutsideDropdown) {
+        setSuggestions([]); 
+      }
+
+      if (isClickOutsideMenu) {
+        setMenuDisplay(false); 
       }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -80,8 +84,8 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
-        setSearch(""); 
-        setSuggestions([]); 
+        setSearch("");
+        setSuggestions([]);
       }
     };
 
@@ -183,7 +187,6 @@ const Header = () => {
 
           {user?._id && (
             <div
-              ref={menuRef}
               className="text-xl cursor-pointer"
               onClick={() => setMenuDisplay((preve) => !preve)}
             >
@@ -192,7 +195,10 @@ const Header = () => {
           )}
           <div className="relative flex justify-center">
             {menuDisplay && (
-              <div className="absolute bg-white bottom-0 top-9 h-fit p-2 shadow-lg rounded">
+              <div
+                ref={menuRef}
+                className="absolute bg-white bottom-0 top-9 h-fit p-2 shadow-lg rounded"
+              >
                 <nav>
                   {user?.role === ROLE.ADMIN ? (
                     <>

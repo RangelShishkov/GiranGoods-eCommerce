@@ -33,6 +33,12 @@ const UploadProduct = ({ onClose, fetchData }) => {
 
   const uploadProductImageHandler = async (e) => {
     const file = e.target.files[0];
+
+    if (!file) {
+      // If no file is selected, return early (this prevents uploading or setting an invalid image)
+      return;
+    }
+  
     const uploadImageCloudinary = await uploadImage(file);
     setData((preve) => {
       return {
@@ -41,6 +47,7 @@ const UploadProduct = ({ onClose, fetchData }) => {
       };
     });
   };
+  
   const deleteProductImageHandler = async (index) => {
     const newProductImage = [...data.productImage];
     newProductImage.splice(index, 1);
@@ -159,7 +166,7 @@ const UploadProduct = ({ onClose, fetchData }) => {
               <div className="flex items-center gap-2">
                 {data.productImage.map((el, index) => {
                   return (
-                    <div className="relative group">
+                    <div className="relative group" key={el}>
                       <img
                         src={el}
                         alt={el}

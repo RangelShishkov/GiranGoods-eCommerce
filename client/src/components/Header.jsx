@@ -62,15 +62,17 @@ const Header = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      const isClickOutsideDropdown = dropdownRef.current && !dropdownRef.current.contains(event.target);
-      const isClickOutsideMenu = menuRef.current && !menuRef.current.contains(event.target);
+      const isClickOutsideDropdown =
+        dropdownRef.current && !dropdownRef.current.contains(event.target);
+      const isClickOutsideMenu =
+        menuRef.current && !menuRef.current.contains(event.target);
 
       if (isClickOutsideDropdown) {
-        setSuggestions([]); 
+        setSuggestions([]);
       }
 
       if (isClickOutsideMenu) {
-        setMenuDisplay(false); 
+        setMenuDisplay(false);
       }
     };
 
@@ -209,13 +211,7 @@ const Header = () => {
                       >
                         Admin Panel
                       </Link>
-                      <Link
-                        to="/profile"
-                        className="whitespace-nowrap hidden md:block hover:bg-slate-100 p-2"
-                        onClick={() => setMenuDisplay((prev) => !prev)}
-                      >
-                        My Profile
-                      </Link>
+
                       <Link
                         to="/order"
                         className="whitespace-nowrap hidden md:block hover:bg-slate-100 p-2"
@@ -226,13 +222,6 @@ const Header = () => {
                     </>
                   ) : (
                     <>
-                      <Link
-                        to="/profile"
-                        className="whitespace-nowrap hidden md:block hover:bg-slate-100 p-2"
-                        onClick={() => setMenuDisplay((prev) => !prev)}
-                      >
-                        My Profile
-                      </Link>
                       <Link
                         to="/order"
                         className="whitespace-nowrap hidden md:block hover:bg-slate-100 p-2"

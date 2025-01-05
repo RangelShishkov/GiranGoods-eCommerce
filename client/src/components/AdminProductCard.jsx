@@ -36,30 +36,33 @@ const AdminProductCard = ({ data, fetchData }) => {
   };
 
   return (
-    <div className="bg-white p-4 rounded">
+    <div className="bg-white p-4 rounded shadow-lg">
       <div className="w-36">
         <div className="w-32 h-32 flex justify-center items-center">
           <img
-            className="mx-auto object-fill h-full"
+            className="mx-auto object-contain h-full"
             src={data?.productImage[0]}
             alt="product"
             width={120}
             height={120}
           />
         </div>
-        <h1 className="text-ellipsis line-clamp-2 overflow-hidden whitespace-nowrap">
-          {data.brandName} 
+        {/* Product Brand */}
+        <h1 className="text-sm font-medium text-slate-600 text-center overflow-hidden overflow-ellipsis whitespace-nowrap">
+          {data.brandName}
         </h1>
-        <h1 className="text-ellipsis line-clamp-2 overflow-hidden whitespace-nowrap">
+        {/* Product Name */}
+        <h1 className="text-base font-semibold text-slate-800 text-center mt-1 overflow-hidden overflow-ellipsis whitespace-nowrap">
           {data.productName}
         </h1>
         <div>
-          <div>
-            <p className="font-semibold">
+          {/* Price Section */}
+          <div className="mt-2">
+            <p className="text-lg font-bold text-cyan-600 text-center">
               {displayCurrency(data.sellingPrice)}
             </p>
           </div>
-
+          {/* BUTTONS */}
           <div className="flex justify-evenly gap-2 mt-2">
             <div
               className="p-2 hover:bg-cyan-500 rounded-full hover:text-white cursor-pointer"

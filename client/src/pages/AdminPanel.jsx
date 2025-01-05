@@ -9,29 +9,34 @@ const AdminPanel = () => {
 
   return (
     <div className="min-h-[calc(100vh-120px)] md:flex hidden">
-      <aside className="bg-white min-h-full w-full max-w-60 customShadow">
-        <div className="h-32 bg-cyan-500 flex justify-center items-center flex-col">
-          <div className="text-3xl cursor-pointer flex justify-center">
-            <FaRegUser />
-          </div>
-          <p>
-            Hello,{" "}
-            <span className="capitalize font-semibold">{user?.name} </span>{" "}
-          </p>
-          <p className="text-sm">{user?.role}</p>
+    <aside className="bg-white min-h-full w-full max-w-[15rem] shadow-md">
+      {/* User Info Section */}
+      <div className="h-32 bg-cyan-500 flex flex-col justify-center items-center">
+        <div className="text-4xl text-white cursor-pointer flex justify-center">
+          <FaRegUser />
         </div>
-        {/***navigation */}
-        <div>
-          <nav className="grid p-4">
-            <Link to={"all-users"} className="px-2 py-1 hover:bg-slate-100">
-              All Users
-            </Link>
-            <Link to={"all-products"} className="px-2 py-1 hover:bg-slate-100">
-              All Products
-            </Link>
-          </nav>
-        </div>
-      </aside>
+        <p className="mt-2 text-white text-base">
+          Hello,{" "}
+          <span className="capitalize font-semibold">{user?.name}</span>
+        </p>
+        <p className="text-sm text-white opacity-75">{user?.role}</p>
+      </div>
+        {/* Navigation Links */}
+    <nav className="p-4 space-y-2">
+      <Link
+        to={"all-users"}
+        className="block px-3 py-2 rounded-md text-slate-700 hover:bg-slate-100 hover:text-cyan-600 transition-colors"
+      >
+        All Users
+      </Link>
+      <Link
+        to={"all-products"}
+        className="block px-3 py-2 rounded-md text-slate-700 hover:bg-slate-100 hover:text-cyan-600 transition-colors"
+      >
+        All Products
+      </Link>
+    </nav>
+  </aside>
       <main className="w-full h-full p-4">
         <Outlet />
       </main>

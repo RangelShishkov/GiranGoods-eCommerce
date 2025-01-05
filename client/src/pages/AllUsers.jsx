@@ -67,7 +67,7 @@ const AllUsers = () => {
   };
 
   return (
-    <div className="bg-white pb-4">
+    <div className="bg-white">
       <table className="w-full userTable">
         <thead>
           <tr className="bg-black text-white">

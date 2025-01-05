@@ -34,16 +34,18 @@ const CategoryList = () => {
                 <Link
                   to={"/product-category?category=" + product?.category}
                   key={product?.category}
-                  className="cursor-pointer group"
+                  className="cursor-pointer group "
                 >
-                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-full group-hover:shadow-xl transition-all overflow-hidden p-4 bg-slate-200 flex items-center justify-center">
+                  {/* Category Icon */}
+                  <div className="w-16 h-16 md:w-20 md:h-20 p-2 rounded-full group-hover:shadow-md transition-all overflow-hidden bg-slate-200 flex items-center justify-center border border-slate-300">
                     <img
                       src={product?.productImage[0]}
-                      alt="product"
-                      className="h-full object-scale-down mix-blend-multiply group-hover:scale-125 transition-all"
+                      alt={product?.category}
+                      className="h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-300"
                     />
                   </div>
-                  <p className="text-center text-sm md:text-base capitalize">
+                  {/* Category Name */}
+                  <p className="text-center text-sm md:text-base font-medium capitalize text-slate-700 group-hover:text-cyan-600 transition-colors">
                     {product?.category}
                   </p>
                 </Link>

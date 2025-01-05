@@ -56,107 +56,112 @@ const SignUp = () => {
   };
 
   return (
-    <section id="login">
-      <div className="mx-auto container p-4">
-        <div className="bg-white p-2 w-full max-w-md mx-auto rounded">
-          <form
-            method="POST"
-            className="p-3 flex flex-col gap-3"
-            onSubmit={onSubmitHandler}
-          >
-            <div className="grid">
-              <label htmlFor="username">Username:</label>
-              <div className="bg-slate-100 p-2">
-                <input
-                  type="name"
-                  placeholder="Enter username.."
-                  name="name"
-                  value={data.name}
-                  onChange={onChangeHandler}
-                  required
-                  className="w-full h-full outline-none bg-transparent "
-                />
-              </div>
-            </div>
-
-            <div className="grid">
-              <label htmlFor="email">Email:</label>
-              <div className="bg-slate-100 p-2">
-                <input
-                  type="email"
-                  placeholder="Enter email.."
-                  name="email"
-                  value={data.email}
-                  onChange={onChangeHandler}
-                  required
-                  className="w-full h-full outline-none bg-transparent "
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="password">Password:</label>
-              <div className="bg-slate-100 p-2 flex">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Enter password.."
-                  name="password"
-                  value={data.password}
-                  onChange={onChangeHandler}
-                  required
-                  className="w-full h-full outline-none bg-transparent"
-                />
-
-                <div
-                  className="cursor-pointer text-lg"
-                  onClick={() => setShowPassword((prev) => !prev)}
-                >
-                  <span>{showPassword ? <FaEyeSlash /> : <IoMdEye />}</span>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="confirm-password">Confirm Password:</label>
-              <div className="bg-slate-100 p-2 flex">
-                <input
-                  type={showConfirmPassword ? "text" : "password"}
-                  placeholder="Confirm password.."
-                  name="confirmPassword"
-                  value={data.confirmPassword}
-                  onChange={onChangeHandler}
-                  required
-                  className="w-full h-full outline-none bg-transparent"
-                />
-
-                <div
-                  className="cursor-pointer text-lg"
-                  onClick={() => setShowConfirmPassword((prev) => !prev)}
-                >
-                  <span>
-                    {showConfirmPassword ? <FaEyeSlash /> : <IoMdEye />}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-4">
-              <button className="text-white bg-cyan-300 w-full px-5 py-2 max-w-[100px] rounded-full hover:scale-110 hover:bg-cyan-400 transition-all mx-auto block">
-                Sign Up
-              </button>
-              <p className="pt-4 pb-2">
-                <Link
-                  to={"/login"}
-                  className="block w-fit mr-auto text-sm hover:underline hover:text-cyan-400"
-                >
-                  Already have an account?
-                </Link>
-              </p>
-            </div>
-          </form>
+    <section id="signup" className="bg-gray-100 h-[calc(100vh-18rem)] flex items-center justify-center">
+  <div className="mx-auto container p-4">
+    <div className="bg-white shadow-lg p-6 w-full max-w-md mx-auto rounded-lg">
+      <h2 className="text-2xl font-semibold text-gray-700 text-center mb-6">Sign Up</h2>
+      <form
+        method="POST"
+        className="space-y-4"
+        onSubmit={onSubmitHandler}
+      >
+        {/* Username Field */}
+        <div>
+          <label htmlFor="username" className="block text-sm font-medium text-gray-600 mb-1">Username</label>
+          <input
+            type="text"
+            placeholder="Enter your username"
+            name="name"
+            value={data.name}
+            onChange={onChangeHandler}
+            required
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-300 focus:outline-none"
+          />
         </div>
-      </div>
-    </section>
+
+        {/* Email Field */}
+        <div>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-600 mb-1">Email</label>
+          <input
+            type="email"
+            placeholder="Enter your email"
+            name="email"
+            value={data.email}
+            onChange={onChangeHandler}
+            required
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-300 focus:outline-none"
+          />
+        </div>
+
+        {/* Password Field */}
+        <div>
+          <label htmlFor="password" className="block text-sm font-medium text-gray-600 mb-1">Password</label>
+          <div className="relative flex items-center">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Enter your password"
+              name="password"
+              value={data.password}
+              onChange={onChangeHandler}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-300 focus:outline-none"
+            />
+            <div
+              className="absolute right-3 text-gray-500 cursor-pointer"
+              onClick={() => setShowPassword((prev) => !prev)}
+            >
+              {showPassword ? <FaEyeSlash /> : <IoMdEye />}
+            </div>
+          </div>
+        </div>
+
+        {/* Confirm Password Field */}
+        <div>
+          <label htmlFor="confirm-password" className="block text-sm font-medium text-gray-600 mb-1">Confirm Password</label>
+          <div className="relative flex items-center">
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              placeholder="Confirm your password"
+              name="confirmPassword"
+              value={data.confirmPassword}
+              onChange={onChangeHandler}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-300 focus:outline-none"
+            />
+            <div
+              className="absolute right-3 text-gray-500 cursor-pointer"
+              onClick={() => setShowConfirmPassword((prev) => !prev)}
+            >
+              {showConfirmPassword ? <FaEyeSlash /> : <IoMdEye />}
+            </div>
+          </div>
+        </div>
+
+        {/* Sign-Up Button */}
+        <div>
+          <button
+            type="submit"
+            className="w-full bg-cyan-500 text-white py-2 px-4 rounded-lg hover:bg-cyan-600 transition-all"
+          >
+            Sign Up
+          </button>
+        </div>
+
+        {/* Redirect to Login */}
+        <div className="text-center text-sm text-gray-500">
+          Already have an account?{" "}
+          <Link
+            to={"/login"}
+            className="text-cyan-500 hover:underline"
+          >
+            Log in
+          </Link>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
   );
 };
 

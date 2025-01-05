@@ -20,6 +20,7 @@ import AdminGuard from "../guards/AdminGuard";
 import UnauthGuard from "../guards/UnauthGuard";
 import PaymentSuccessGuard from "../guards/PaymentSuccessGuard";
 import PaymentCancelGuard from "../guards/PaymentCancelGuard";
+import NotFoundPage from "../pages/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -123,6 +124,10 @@ const router = createBrowserRouter([
             ),
           },
         ],
+      },
+      {
+        path: "*",
+        element: <NotFoundPage />,
       },
     ],
   },

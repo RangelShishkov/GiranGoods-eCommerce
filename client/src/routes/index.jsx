@@ -21,6 +21,7 @@ import UnauthGuard from "../guards/UnauthGuard";
 import PaymentSuccessGuard from "../guards/PaymentSuccessGuard";
 import PaymentCancelGuard from "../guards/PaymentCancelGuard";
 import NotFoundPage from "../pages/NotFound";
+import AllOrders from "../pages/AllOrders";
 
 const router = createBrowserRouter([
   {
@@ -123,6 +124,14 @@ const router = createBrowserRouter([
               </AdminGuard>
             ),
           },
+          {
+            path: "all-orders",
+            element: (
+              <AdminGuard>
+                <AllOrders />
+              </AdminGuard>
+            ),
+          }
         ],
       },
       {

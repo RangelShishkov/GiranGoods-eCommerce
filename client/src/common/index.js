@@ -1,4 +1,4 @@
-const backendDomain = import.meta.env.VITE_BACKEND_URL  //"http://localhost:8080";
+const backendDomain = import.meta.env.VITE_BACKEND_URL  //"http://localhost:8080" 
 
 const SummaryApi = {
   signUp: {
@@ -91,6 +91,10 @@ const SummaryApi = {
   },
   getOrder: {
     url: `${backendDomain}/api/order-list`,
+    method: "get",
+  },
+  allOrders: {
+    url: `${backendDomain}/api/all-orders`,
     method: "get",
   },
 };

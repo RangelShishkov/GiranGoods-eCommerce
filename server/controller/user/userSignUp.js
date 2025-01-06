@@ -15,15 +15,6 @@ async function userSignUpController(req, res) {
       throw new Error("This USERNAME is already taken!")
     }
 
-    if (!email) {
-      throw new Error("Please provide an email!");
-    }
-    if (!password) {
-      throw new Error("Please provide a password!");
-    }
-    if (!name) {
-      throw new Error("Please provide a name!");
-    }
 
     const salt = bcrypt.genSaltSync(10);
     const hashPassword = bcrypt.hashSync(password, salt);

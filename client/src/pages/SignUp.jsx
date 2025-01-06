@@ -75,6 +75,7 @@ const SignUp = () => {
             value={data.name}
             onChange={onChangeHandler}
             required
+            minLength="4"
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-300 focus:outline-none"
           />
         </div>
@@ -104,6 +105,7 @@ const SignUp = () => {
               value={data.password}
               onChange={onChangeHandler}
               required
+              minLength="8" 
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-300 focus:outline-none"
             />
             <div

@@ -1,15 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
-import { Link } from "react-router-dom"; // Import Link component for navigation
+import { Link } from "react-router-dom";
 
+import imageSpeaker from "../assets/banner/speaker-slider.png";
 import imageIphone from "../assets/banner/iphone-slider.webp";
-import imagePlaystation from "../assets/banner/playstation-slider.jpg";
-import imageCoffe from "../assets/banner/slider-coffe.jpg";
-import imageIron from "../assets/banner/slider-iutiq.png";
+import imageTv from "../assets/banner/tv-slider.jpg";
 import imageWatch from "../assets/banner/watch-slider.jpg";
-import imagePhone from "../assets/banner/phone-slider.jpg";
-import imageTv from "../assets/banner/slider-tv.jpg";
-import imageIntel from "../assets/banner/intel-slider.jpeg";
+import imagePhone from "../assets/banner/xiaomi-slider.jpg";
+import imageAirpods from "../assets/banner/earbuds-slider.webp";
+import imageProcessor from "../assets/banner/processor-slider.jpg";
 
 const SlidingBanner = () => {
   const [currentImage, setCurrentImage] = useState(0);
@@ -17,13 +16,12 @@ const SlidingBanner = () => {
   // Array of images
   const deskImages = [
     imagePhone,
-    imagePlaystation,
-    imageIntel,
-    imageIphone,
     imageTv,
+    imageProcessor,
+    imageIphone,
+    imageAirpods,
     imageWatch,
-    imageCoffe,
-    imageIron,
+    imageSpeaker
   ];
 
   // Array of URLs for each product category
@@ -32,10 +30,9 @@ const SlidingBanner = () => {
     "/product-category?category=television",
     "/product-category?category=processor",
     "/product-category?category=phone",
-    "/product-category?category=television",
+    "/product-category?category=airpods",
     "/product-category?category=watches",
     "/product-category?category=speaker",
-    "/product-category?category=trimmer",
   ];
 
   const nextImage = useCallback(() => {

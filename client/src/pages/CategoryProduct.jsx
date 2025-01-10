@@ -81,11 +81,11 @@ const CategoryProduct = () => {
   const onChangeSortHandler = (e) => {
     const { value } = e.target;
     setSortBy(value);
-    if (value === "ascending") {
+    if (value === "asc") {
       setData((preve) => preve.sort((a, b) => a.sellingPrice - b.sellingPrice));
     }
 
-    if (value === "descending") {
+    if (value === "dsc") {
       setData((preve) => preve.sort((a, b) => b.sellingPrice - a.sellingPrice));
     }
   };

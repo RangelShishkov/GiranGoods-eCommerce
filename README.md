@@ -1,7 +1,14 @@
 # GiranGoods: E-Commerce
 
-**GiranGoods** is a modern, full-stack e-commerce application built using the MERN stack. \
-Live Demo : https://mern-ecommerce-3gyi.vercel.app/
+**GiranGoods** is a modern, full-stack e-Commerce application using the **MERN**
+stack.
+
+It includes secure **user authentication, product browsing, cart** and
+**checkout features**, an **admin panel** for managing products orders and users, and a
+fully **responsive design** for all devices." 
+
+## Preview
+Live Demo: https://mern-ecommerce-3gyi.vercel.app/ 
 
 ## Tech Stack
    - **Frontend**: React, Redux

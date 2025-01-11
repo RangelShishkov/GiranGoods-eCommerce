@@ -51,7 +51,7 @@ adminadmin
 ## Getting Started
 1. **Clone the repository**
    ```
-   git clone https://github.com/RangelShishkov/MERN-ecommerce.git
+   git clone https://github.com/RangelShishkov/GiranGoods-eCommerce.git
    cd project-folder
    ```
 3. **Install dependencies**

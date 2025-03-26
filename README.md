@@ -10,6 +10,10 @@ fully **responsive design** for all devices."
 ## Preview
 Live Demo: https://mern-ecommerce-3gyi.vercel.app/ 
 
+Admin Credentials\
+admin@gmail.com\
+adminadmin
+
 ## Tech Stack
    - **Frontend**: React, Redux
    - **Backend**: Node.js, Express.js
@@ -47,7 +51,7 @@ Live Demo: https://mern-ecommerce-3gyi.vercel.app/
 ## Getting Started
 1. **Clone the repository**
    ```
-   git clone https://github.com/RangelShishkov/MERN-ecommerce.git
+   git clone https://github.com/RangelShishkov/GiranGoods-eCommerce.git
    cd project-folder
    ```
 3. **Install dependencies**
